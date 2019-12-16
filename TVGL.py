@@ -107,18 +107,11 @@ def update_u(block_size, S, rho, alpha, beta, Theta, Z0, Z1, Z2, U0, U1, U2):
 
     return U0, U1, U2
 
-def check_stop(Theta, Theta_):
+def check_stop(Theta, Theta_pre):
     stop = True
     for i in range(len(Theta)):
-        norm_theta = 0
-        dif_theta = 0
-        for m in range(Theta[0].shape[0]):
-            for n in range(m + 1, Theta[0].shape[1]):
-                norm_theta = norm_theta + Theta[i][m, n] ** 2
-                dif_theta = dif_theta + (Theta[i][m, n]- Theta_[i][m, n]) ** 2
-        norm_theta = np.sqrt(norm_theta)
-        dif_theta = np.sqrt(dif_theta)
-        if dif_theta >= norm_theta * 1e-3:
+        dif = np.linalg.norm(Theta[i] - Theta_pre[i])
+        if dif > 1e-3:
             stop = False
             break
     return stop
@@ -133,12 +126,12 @@ def admm(block_size, S, rho, alpha, beta, max_iters):
     iters = 0
     stop = False
     while iters < max_iters:
-        Theta_ = copy.deepcopy(Theta)
+        Theta_pre = copy.deepcopy(Theta)
         Theta = update_theta(block_size, S, rho, alpha, beta, Theta, Z0, Z1, Z2, U0, U1, U2)
         Z0, Z1, Z2 = update_z(block_size, S, rho, alpha, beta, Theta, Z0, Z1, Z2, U0, U1, U2)
         U0, U1, U2 = update_u(block_size, S, rho, alpha, beta, Theta, Z0, Z1, Z2, U0, U1, U2)
         iters = iters + 1
-        stop = check_stop(Theta, Theta_)
+        stop = check_stop(Theta, Theta_pre)
         if stop == True:
             break
 
