@@ -11,7 +11,7 @@ git clone https://github.com/ams129/TVGL.git
 # Usage
 TVGL can be called through the following file:
 ```
-TVGL.py
+tvgl.py
 ```
 
 Parameters
