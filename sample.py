@@ -1,9 +1,15 @@
 import numpy as np
-import TVGL
+import tvgl
 
+# load data
 data = np.loadtxt("testdata.txt")
-alpha = 5
+
+# set parameters
+alpha = 10
 beta = 10
-penalty = "L1"
+penalty_type = "L1"
 slice_size = 20
-Theta, S = TVGL.solve(data, alpha, beta, penalty, slice_size)
+
+# run TVGL
+model = tvgl.TVGL(alpha, beta, penalty_type, slice_size)
+model.fit(X)

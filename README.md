@@ -18,7 +18,7 @@ Parameters
 * data : numpy array with the raw data
 * alpha : the regularization parameter controlling the network sparsity
 * beta : the beta parameter controlling the temporal consistency
-* penalty : the penalty type("L1" or "L2")
+* penalty_type : the penalty type("L1" or "L2")
 * slice_size : Number of samples in each timestamps
 
 # Example
