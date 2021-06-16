@@ -15,7 +15,7 @@ tvgl.py
 ```
 
 Parameters
-* data : numpy array with the raw data
+* X : numpy array with the raw data
 * alpha : the regularization parameter controlling the network sparsity
 * beta : the beta parameter controlling the temporal consistency
 * penalty_type : the penalty type("L1" or "L2")
@@ -24,5 +24,5 @@ Parameters
 # Example
 Running the following script provides an example of how the TVGL solver can be used:
 ```
-sample.py
+example.py
 ```
